@@ -22,3 +22,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+## Tabel名
+
+|Column|Type|Options|
+|------|----|-------|
+（ここに追記していく）
+
+
+### Association
+（ここに追記していく）
