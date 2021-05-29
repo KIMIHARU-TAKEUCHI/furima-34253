@@ -22,12 +22,58 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-## Tabel名
+## users テーブル
 
-|Column|Type|Options|
-|------|----|-------|
-（ここに追記していく）
-
+|Column----|Type--|Options----|
+| -------- | ---- | --------- |
+|name------|string|null: false|
+|email-----|string|null: false|
+|password--|string|null: false|
 
 ### Association
-（ここに追記していく）
+
+- has_many :items
+- has_many :orders
+
+## items テーブル
+
+|Column----|Type--|Options----|
+| -------- | ---- | --------- |
+|name------|string|null: false|
+|category--|string|null: false|
+|price-----|string|null: false|
+
+### Association
+
+- belongs_to :users
+- has_one :orders
+
+## Orders テーブル
+
+|Column----|Type--|Options----|
+| -------- | ---- | --------- |
+|user------|string|null: false|
+
+### Association
+
+- belongs_to :users
+- belongs_to :items
+- has_one :address
+
+## address テーブル
+
+|Column----------|Type--|Options----|
+| -------------- | ---- | --------- |
+|first_name------|string|null: false|
+|family_name-----|string|null: false|
+|first_name_kana-|string|null: false|
+|family_name_kana|string|null: false|
+|post_code-------|string|null: false|
+|city------------|string|null: false|
+|house_number----|string|null: false|
+|building_name---|string|null: false|
+|phone_number----|string|null: false|
+
+### Association
+
+- belongs_to :orders
