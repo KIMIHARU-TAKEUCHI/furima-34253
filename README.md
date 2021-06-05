@@ -1,13 +1,15 @@
 ## users テーブル
 
-|Column----------|Type--|Options----|
-| ---------------| ---- | --------- |
-|first_name------|string|null: false|
-|family_name-----|string|null: false|
-|first_name_kana-|string|null: false|
-|family_name_kana|string|null: false|
-|email-----------|string|null: false|
-|password--------|string|null: false|
+|Column-----------|Type--|Options----|
+| ----------------| ---- | --------- |
+|nickname---------|string|null: false|
+|first_name-------|string|null: false|
+|family_name------|string|null: false|
+|first_name_kana--|string|null: false|
+|family_name_kana-|string|null: false|
+|email------------|string|null: false,unique:true,index:true|
+|encrypted_password|string|null: false|
+|birth_data-------|string|null: false|
 
 ### Association
 
@@ -16,15 +18,15 @@
 
 ## items テーブル
 
-|Column---------|Type--|Options----|
-| --------------| ---- | --------- |
-|name-----------|string|null: false|
-|item_condition-|integer|null: false|
-|preparation_day|integer|null: false|
-|postage_type---|integer|null: false|
-|postage_payer--|integer|null: false|
-|category-------|string|null: false|
-|price----------|string|null: false|
+|Column------------|Type--|Options----|
+| -----------------| ---- | --------- |
+|name_id-----------|string|null: false|
+|item_condition_id-|integer|null: false|
+|preparation_day_id|integer|null: false|
+|postage_type_id---|integer|null: false|
+|postage_payer_id--|integer|null: false|
+|category_id-------|integer|null: false|
+|price-------------|string|null: false|
 
 ### Association
 
@@ -79,8 +81,8 @@
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
+- belong_to :users
+- belong_to :items
 - has_one :address
 
 ## address テーブル
@@ -99,4 +101,4 @@
 
 ### Association
 
-- belongs_to :orders
+- belong_to :orders
