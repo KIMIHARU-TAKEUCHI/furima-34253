@@ -22,12 +22,11 @@
 | -----------------| ---- | --------- |
 |name--------------|string|null: false|
 |item_info---------|text---|null: false|
-## |item_condition_id-|integer|null: false|
-## |preparation_day_id|integer|null: false|
-## |postage_type_id---|integer|null: false|
-## |postage_payer_id--|integer|null: false|
-## |category_id-------|integer|null: false|
-## |price-------------|integer|null: false|
+|item_condition_id-|integer|null: false|
+|preparation_day_id|integer|null: false|
+|postage_type_id---|integer|null: false|
+|postage_payer_id--|integer|null: false|
+|category_id-------|integer|null: false|
 |user--------------|references|null: false, foreign_key: true|
 
 ### Association
@@ -39,46 +38,15 @@
 - belong_to:postage_type
 - belong_to:postage_payer
 
-## items_conditions テーブル
 
-## |Column--------|Type--|Options----|
-## | -------------| ---- | --------- |
-## |item_condition|integer|null: false|
 
-### Association
-- has_many :items
 
-## preparation_days テーブル
-
-## |Column---------|Type--|Options----|
-## | --------------| ---- | --------- |
-## |preparation_day|integer|null: false|
-
-### Association
-- has_many :items
-
-## postage_types テーブル
-
-## |Column---------|Type--|Options----|
-## | --------------| ---- | --------- |
-## |postage_type---|integer|null: false|
-
-### Association
-- has_many :items
-
-## categories テーブル
-
-|Column-----|Type--|Options----|
-| ----------| ---- | --------- |
-|category---|string|null: false|
-
-### Association
-- has_many :items
 
 ## Orders テーブル
 
 |Column----|Type--|Options----|
 | -------- | ---- | --------- |
+|items------|references|null: false, foreign_key: true|
 |user------|references|null: false, foreign_key: true|
 
 ### Association
@@ -89,14 +57,14 @@
 
 ## address テーブル
 
-## |Column----------|Type--|Options----|
-## | -------------- | ---- | --------- |
-## |post_code-------|string|null: false|
-## |prefectural_id--|integer|null: false|
-## |city------------|string|null: false|
-## |house_number----|string|null: false|
-## |building_name---|string|-----------|
-## |phone_number----|string|null: false|
+|Column----------|Type--|Options----|
+| -------------- | ---- | --------- |
+|post_code-------|string|null: false|
+|prefectural_id--|integer|null: false|
+|city------------|string|null: false|
+|house_number----|string|null: false|
+|building_name---|string|-----------|
+|phone_number----|string|null: false|
 
 ### Association
 
