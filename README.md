@@ -66,7 +66,7 @@
 ### Association
 - has_many :items
 
-## categoris テーブル
+## categories テーブル
 
 |Column-----|Type--|Options----|
 | ----------| ---- | --------- |
