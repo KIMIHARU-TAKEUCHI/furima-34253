@@ -7,14 +7,14 @@
 |family_name------|string|null: false|
 |first_name_kana--|string|null: false|
 |family_name_kana-|string|null: false|
-|email------------|string|null: false,unique:true,index:true|
-|encrypted_password|string|null: false|
+|email------------|string|null: false,unique:true|
+|encrypted_password|string|null: false,foreign_key: true|
 |birth_data-------|date---|null: false|
 
 ### Association
 
-- has_many :items,foreign_key: true
-- has_many :orders,foreign_key: true
+- has_many :items
+- has_many :orders
 
 ## items テーブル
 
