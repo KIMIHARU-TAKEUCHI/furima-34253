@@ -32,9 +32,9 @@
 
 ### Association
 
-- belong_to :users
+- belong_to :users, foreign_key: true
 - belong_to :category
-- has_one :order
+- has_one :order,foreign_key: true
 - belong_to:item_condition
 - belong_to:postage_type
 - belong_to:postage_payer
