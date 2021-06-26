@@ -5,9 +5,8 @@ require 'rails_helper'
       @user = FactoryBot.build(:user)
     end
 
-    context '保存できる場合' do
-    end
-
+  context '保存できる場合' do
+    
     it 'nicknameとemail、passwordとpassword_confirmationが存在すれば登録できること' do
       expect(@user).to be_valid
     end
@@ -17,9 +16,9 @@ require 'rails_helper'
       @user.password_confirmation = 'a00000'
       expect(@user).to be_valid
     end
-    
+  end
+
     context '保存できない場合' do
-    end
 
      it "nicknameが空だと登録できない" do
        @user.nickname = ''
@@ -109,19 +108,19 @@ require 'rails_helper'
      it 'password:半角英数混合(半角英語のみ)' do
       @user.password = 'Aaaaaaa'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
      end
 
      it 'password:全角英数混合では登録できないこと' do
       @user.password = 'AAAAAA'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
      end
 
      it 'password:半角数字のみでは登録できない' do
       @user.password = 'Aaaaaaa'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
      end
 
      it 'passwordとpassword_confirmationが不一致では登録できない' do
@@ -135,6 +134,7 @@ require 'rails_helper'
        @user.birth_data = ''
        @user.valid?
        expect(@user.errors.full_messages).to include("Birth data can't be blank")
+      end
     end
    end
  end
