@@ -118,7 +118,7 @@ require 'rails_helper'
      end
 
      it 'password:半角数字のみでは登録できない' do
-      @user.password = 'Aaaaaaa'
+      @user.password = 'aaaaaa'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
      end
