@@ -1,40 +1,52 @@
 require 'rails_helper'
  RSpec.describe User, type: :model do
    describe "ユーザー新規登録" do
-     it "nicknameが空だと登録できない" do
-       user = User.new(nickname: "", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", birth_data: "19010101")
-       user.valid?
-       expect(user.errors.full_messages).to include("Nickname can't be blank")
-     end
-     it "emailが空では登録できない" do
-       user = User.new(nickname: "abe", email: "", password: "00000000", password_confirmation: "00000000", birth_data: "19010101")
-       user.valid?
-       expect(user.errors.full_messages).to include("Email can't be blank")
-     end
-     it 'passwordが空では登録できない' do
-      user = User.new(nickname: "abe", email: "kkk@gmail.com", password: "", password_confirmation: "00000000", birth_data: "1901-01-01")
-       user.valid?
-       expect(user.errors.full_messages).to include("Email can't be blank")
-     end
-      it 'passwordが5文字以下では登録できない' do
-      user = User.new(nickname: "abe", email: "kkk@gmail.com", password: "00000", password_confirmation: "00000", birth_data: "1901-01-01")
-       user.valid?
-       expect(user.errors.full_messages).to include("Email can't be blank")
-     end
-     it '生年月日が空では登録できない' do
-      user = User.new(nickname: "abe", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", birth_data: "")
-       user.valid?
-       expect(user.errors.full_messages).to include("Email can't be blank")
+    before do
+      @user = FactoryBot.build(:user)
     end
-     it 'passwordとpassword_confirmationが6文字以上であれば登録できる' do
-      user = User.new(nickname: "abe", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000",birth_data: "19010101")
+    it 'nicknameとemail、passwordとpassword_confirmationが存在すれば登録できること' do
       expect(@user).to be_valid
+    end
+
+     it "nicknameが空だと登録できない" do
+       @user.nickname = ''
+       @user.valid?
+       expect(@user.errors.full_messages).to include("Nickname can't be blank")
      end
+
+     it "emailが空では登録できない" do
+       @user.email = ''
+       @user.valid?
+       expect(@user.errors.full_messages).to include("Email can't be blank")
+     end
+
+     it 'passwordが空では登録できない' do
+       @user.password = ''
+       @user.valid?
+       expect(@user.errors.full_messages).to include("Password can't be blank")
+     end
+
+     it 'passwordが6文字以上であれば登録できること' do
+      @user.password = 'a00000'
+      @user.password_confirmation = 'a00000'
+      expect(@user).to be_valid
+    end
+
+      it 'passwordが5文字以下では登録できない' do
+       @user.password = '00000'
+       @user.valid?
+       expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+     end
+
      it 'password:半角英数混合(半角英語のみ)' do
       @user.password = 'Aaaaaaa'
       @user.valid?
-      binding.pry
-      expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+     end
+     it '生年月日が空では登録できない' do
+       @user.birth_data = ''
+       @user.valid?
+       expect(@user.errors.full_messages).to include("Birth data can't be blank")
     end
    end
  end
