@@ -4,8 +4,15 @@ require 'rails_helper'
     before do
       @user = FactoryBot.build(:user)
     end
+
+    context '保存できる場合' do
+    end
+
     it 'nicknameとemail、passwordとpassword_confirmationが存在すれば登録できること' do
       expect(@user).to be_valid
+    end
+    
+    context '保存できない場合' do
     end
 
      it "nicknameが空だと登録できない" do
@@ -20,16 +27,22 @@ require 'rails_helper'
        expect(@user.errors.full_messages).to include("Email can't be blank")
      end
 
-     it 'passwordが空では登録できない' do
-       @user.password = ''
-       @user.valid?
-       expect(@user.errors.full_messages).to include("Password can't be blank")
+     context '保存できる場合' do
      end
 
      it 'passwordが6文字以上であれば登録できること' do
       @user.password = 'a00000'
       @user.password_confirmation = 'a00000'
       expect(@user).to be_valid
+    end
+    
+    context '保存できない場合' do
+    end
+    
+    it 'passwordが空では登録できない' do
+      @user.password = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
     end
 
       it 'passwordが5文字以下では登録できない' do
