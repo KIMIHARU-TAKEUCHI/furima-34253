@@ -1,8 +1,5 @@
 class Item < ApplicationRecord
-  belongs_to :user
-  belongs_to :name
-  has_one_attached :image
-
+  
   def change
     create_table :items do |t|
       t.string  :name, null: false
@@ -18,5 +15,13 @@ class Item < ApplicationRecord
   end
 
   belongs_to :user
+  belongs_to :name
+  has_one_attached :image
+
+  validates :name, presence: true
+
+  def was_attached?
+    self.image.attached?
+  end
 
 end
