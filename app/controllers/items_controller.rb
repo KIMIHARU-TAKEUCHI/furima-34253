@@ -1,14 +1,19 @@
 class ItemsController < ApplicationController
   def index
-    @items = Items.includes(:user)
+    @items = Item.includes(:user)
   end
 
   def new
-    @tweet = Items.new
+    @items = Item.new
   end
 
   def create
-    Items.create(items_params)
+    Item.create(items_params)
+    if @items.save
+      redirect_to items_path
+    else
+      render :new
+    end
   end
 
   private
