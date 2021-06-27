@@ -5,13 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: '全角文字を使用してください' } do
-  validates :first_name, presence: true
-  validates :family_name, presence: true
+  validates :first_name
+  validates :family_name
   end
   with_options presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: '全角文字を使用してください' } do
-  validates :first_name_kana, presence: true,
-  validates :family_name_kana, presence: true,
+  validates :first_name_kana
+  validates :family_name_kana
   end
+
   validates :birth_data, presence: true
   validates :nickname, presence: true
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
