@@ -7,8 +7,21 @@ class Item < ApplicationRecord
   belongs_to :preparation_day
   belongs_to :item_condition
 
-  validates :name, :price, :item_info, :prefectural_id, :item_condition_id, :preparation_day_id, :postage_payer_id, :category_id, presence: true
-  #validates :item_id, :item_info, :prefectural_id, :item_condition_id, :preparation_day_id, :postage_payer_id, :category_id, numericality: { other_than: 1 } 
+  with_options presence: true do
+    validates :image
+    validates :name
+    validates :item_info
+    validates :price
+  end
+
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "Out of setting range"}
+  validates :price, numericality: { only_integer: true, message: "Half-width number" }
+  validates :item_condition_id, numericality: { other_than: 1, message: "Condition Select" }
+  validates :postage_payer_id, numericality: { other_than: 1, message: "Shipping charge Select" }
+  validates :prefectural_id, numericality: { other_than: 1, message: "Ship from Select" }
+  validates :preparation_day_id, numericality: { other_than: 1, message: "Guideline Select" }
+  validates :category_id, numericality: { other_than: 1, message: "Category Select" }
+
   def was_attached?
     self.image.attached?
   end
